@@ -1,13 +1,14 @@
 {
-    "name": "openapi-zod-client",
+    "name": "@joprice/openapi-zod-client",
     "version": "1.18.3",
     "repository": {
         "type": "git",
         "url": "https://github.com/astahmer/openapi-zod-client.git"
     },
     "author": "Alexandre Stahmer <alexandre.stahmer@gmail.com>",
-    "main": "dist/openapi-zod-client.cjs.js",
-    "module": "dist/openapi-zod-client.esm.js",
+    "main": "dist/joprice-openapi-zod-client.cjs.js",
+    "module": "dist/joprice-openapi-zod-client.esm.js",
+    "types": "dist/joprice-openapi-zod-client.cjs.d.ts",
     "homepage": "https://github.com/astahmer/openapi-zod-client",
     "bin": {
         "openapi-zod-client": "./bin.js"

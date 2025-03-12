@@ -92,11 +92,14 @@ export function getZodSchema({ schema: $schema, ctx, meta: inheritedMeta, option
         const hasMultipleAllOf = schema.oneOf?.some((obj) => isSchemaObject(obj) && (obj?.allOf || []).length > 1);
         if (schema.discriminator && !hasMultipleAllOf) {
             const propertyName = schema.discriminator.propertyName;
-
+            const isReadOnly = options?.allReadonly;
             return code.assign(`
                 z.discriminatedUnion("${propertyName}", [${schema.oneOf
-                .map((prop) => getZodSchema({ schema: prop, ctx, meta, options }))
-                .join(", ")}])
+                .map((prop) => {
+                    const schema = getZodSchema({ schema: prop, ctx, meta, options });
+                    return isReadOnly ? `${schema.toString()}.unwrap()` : schema;
+                })
+                .join(", ")}])${isReadOnly ? ".readonly()" : ""}
             `);
         }
 
@@ -213,15 +216,11 @@ export function getZodSchema({ schema: $schema, ctx, meta: inheritedMeta, option
     if (schemaType === "array") {
         if (schema.items) {
             return code.assign(
-                `z.array(${
-                    getZodSchema({ schema: schema.items, ctx, meta, options }).toString()
-                }${
-                    getZodChain({
-                        schema: schema.items as SchemaObject,
-                        meta: { ...meta, isRequired: true },
-                        options,
-                    })
-                })${readonly}`
+                `z.array(${getZodSchema({ schema: schema.items, ctx, meta, options }).toString()}${getZodChain({
+                    schema: schema.items as SchemaObject,
+                    meta: { ...meta, isRequired: true },
+                    options,
+                })})${readonly}`
             );
         }
 
