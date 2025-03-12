@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@apidevtools/swagger-parser": "^10.1.0",
-        "openapi-zod-client": "workspace:^1.0.0",
+        "@joprice/openapi-zod-client": "workspace:^1.0.0",
         "zod": "^3.19.1"
     }
 }

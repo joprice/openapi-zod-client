@@ -14,7 +14,7 @@ module.exports = defineConfig({
     rules: {
         // "file-progress/activate": 1
         "unicorn/prefer-module": 0,
-        "sonarjs/cognitive-complexity": ["warn", 30],
+        // "sonarjs/cognitive-complexity": ["warn", 30],
         "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     },
     overrides: [

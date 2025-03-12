@@ -306,6 +306,12 @@ export const getZodChain = ({ schema, meta, options }: ZodChainArgs) => {
 
     const brand = schema["x-brand"] ? `brand("${schema["x-brand"]}")` : null;
 
+    // match(schema.type)
+    //    .with("string", () => chains.push(getZodChainableStringValidations(schema)))
+    //    .with("number", "integer", () => chains.push(getZodChainableNumberValidations(schema)))
+    //    .with("array", () => chains.push(getZodChainableArrayValidations(schema)))
+    //    .otherwise(() => void 0);
+
     const validations = match(schema.type)
         .with("string", () => getZodChainableStringValidations(schema))
         .with("number", "integer", () => getZodChainableNumberValidations(schema))
@@ -318,9 +324,7 @@ export const getZodChain = ({ schema, meta, options }: ZodChainArgs) => {
         })
         .with([P.nullish, P.not(P.nullish)], ([_, validations]) => chains.push(validations))
         .with([P.not(P.nullish), P.nullish], ([brand]) => chains.push(brand))
-        .with([P.not(P.nullish), P.not(P.nullish)], ([brand, validations]) =>
-            chains.push([validations, brand].join("."))
-        )
+        .with([P.not(P.nullish), P.not(P.nullish)], ([brand, validations]) => chains.push(validations, brand))
         .exhaustive();
 
     if (typeof schema.description === "string" && schema.description !== "" && options?.withDescription) {

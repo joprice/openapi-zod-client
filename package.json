@@ -26,19 +26,18 @@
         "release": "pnpm changeset publish"
     },
     "license": "ISC",
-    "dependencies": {
+    "devDependencies": {
         "@babel/core": "^7.19.6",
         "@babel/preset-env": "^7.19.4",
-        "@babel/preset-typescript": "^7.18.6"
-    },
-    "devDependencies": {
+        "@babel/preset-typescript": "^7.18.6",
+        "typescript": "^5.8.2",
         "@changesets/changelog-github": "^0.4.8",
         "@changesets/cli": "^2.26.0",
         "@preconstruct/cli": "^2.2.1",
         "conventional-changelog-cli": "^2.2.2",
+        "eslint-define-config": "^2.1.0",
         "prettier": "^2.7.1",
-        "tsx": "^3.11.0",
-        "typescript": "^4.8.3"
+        "tsx": "^3.11.0"
     },
     "registry": "https://npm.pkg.github.com"
 }
