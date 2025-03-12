@@ -1,5 +1,10 @@
 # openapi-zod-client
 
+## 1.18.4
+
+### Minor Changes
+- add brand feature from https://github.com/astahmer/openapi-zod-client/pull/265
+
 ## 1.18.3
 
 ### Patch Changes
